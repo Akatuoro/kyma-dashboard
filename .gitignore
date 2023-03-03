@@ -132,6 +132,7 @@ dist
 
 dist
 extensions-local
+validation-configs-local
 
 .DS_Store
 

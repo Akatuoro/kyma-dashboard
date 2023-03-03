@@ -8,6 +8,10 @@ const through2 = require('through2');
 const concat = require('gulp-concat');
 const clean = require('gulp-clean');
 
+// Imported tasks
+require('./gulp/validationConfigTasks');
+
+
 const mapValues = (obj, fn) =>
   Object.fromEntries(
     Object.entries(obj).map(([key, value]) => [key, fn(value)]),

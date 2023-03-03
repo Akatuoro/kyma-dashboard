@@ -1,0 +1,11 @@
+[
+  {
+    "source": "https://raw.githubusercontent.com/datreeio/datree/main/pkg/defaultRules/defaultRules.yaml"
+  },
+  {
+    "source": "validation-configs/default"
+  },
+  {
+    "source": "validation-configs/kubernetes-pod-security-standards"
+  }
+]
