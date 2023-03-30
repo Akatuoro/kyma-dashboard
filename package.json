@@ -6,6 +6,9 @@
   "scripts": {
     "pack-extensions": "gulp pack-extensions",
     "prepare-extensions": "gulp clean-extensions && gulp get-extensions",
+    "update-validation-configs": "gulp update-validation-configs",
+    "prepare-validation-configs": "gulp clean-validation-configs && gulp get-validation-configs",
+    "pack-validation-configs": "gulp pack-validation-configs",
     "lint-fix": "prettier --config ./.prettierrc --write '**/*.{ts,tsx,js,jsx,json,html,css,yaml,md}' --ignore-path ./.prettierignore"
   },
   "devDependencies": {

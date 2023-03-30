@@ -43,8 +43,7 @@ const readExternalFile = async fileAddress => {
   const contents = await res.text();
   return {
     contents,
-    name: `${url.host}/${url.pathname}`,
-    // name: fileAddress.substr(fileAddress.lastIndexOf('/') + 1),
+    filePath: `${url.host}/${url.pathname}`,
   }
 };
 
@@ -79,17 +78,11 @@ function loadFiles() {
 
     const results = (await Promise.all(requests.flat())).flat();
 
-    results.forEach(({ contents, name, filePath }) => {
+    results.forEach(({ contents, filePath }) => {
       const file = extensionsFile.clone();
 
-      if (filePath) {
-        file.base = null;
-        file.path = filePath;
-      }
-      else {
-        file.base = null;
-        file.path = name;
-      }
+      file.base = null;
+      file.path = filePath;
 
       file.contents = Buffer.from(contents);
       this.push(file);

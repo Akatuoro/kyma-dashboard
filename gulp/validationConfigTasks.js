@@ -4,9 +4,31 @@ const Vinyl = require('vinyl');
 const gulp = require('gulp');
 const clean = require('gulp-clean');
 
-const {Transform} = require('stream');
+const { Transform } = require('stream');
+const { loadFiles } = require('./loadFiles');
 
-const {loadFiles} = require('./loadFiles');
+
+gulp.task('clean-validation-configs-imports', () => {
+  return gulp
+    .src(`validation-configs/imports`, {
+      read: false,
+      allowEmpty: true,
+    })
+    .pipe(clean());
+});
+
+gulp.task('pull-validation-configs-imports', () => {
+  return gulp
+    .src(`validation-configs/imports.json`)
+    .pipe(loadFiles())
+    .pipe(gulp.dest(`validation-configs/imports`));
+});
+
+gulp.task('update-validation-configs', gulp.series(
+  'clean-validation-configs-imports',
+  'pull-validation-configs-imports'
+));
+
 
 
 gulp.task('clean-validation-configs', () => {
@@ -44,7 +66,7 @@ const combineValidationConfig = (name) => {
     transform(file, encoding, callback) {
       const validationSchema = jsyaml.loadAll(file.contents);
 
-      validationSchema.forEach(({rules = [], policies = [], aliases = []}) => {
+      validationSchema.forEach(({ rules = [], policies = [], aliases = [] }) => {
         this.aliases.push(...aliases);
         this.rules.push(...rules);
         this.policies.push(...policies);
@@ -71,9 +93,9 @@ const combineValidationConfig = (name) => {
 }
 
 gulp.task('pack-validation-configs', () => {
-    const env = process.env.ENV;
-    return gulp
-      .src(`environments/${env}/validation-configs-local/**/*.yaml`)
-      .pipe(combineValidationConfig('validation-config.yaml'))
-      .pipe(gulp.dest(`environments/${env}/dist`));
+  const env = process.env.ENV;
+  return gulp
+    .src(`environments/${env}/validation-configs-local/**/*.yaml`)
+    .pipe(combineValidationConfig('validation-config.yaml'))
+    .pipe(gulp.dest(`environments/${env}/dist`));
 });
