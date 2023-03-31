@@ -1,3 +1,6 @@
+# for autocompletion in VS Code
+# yaml-language-server: $schema=../configSchema.json
+
 apiVersion: v1
 policies:
   - name: Default

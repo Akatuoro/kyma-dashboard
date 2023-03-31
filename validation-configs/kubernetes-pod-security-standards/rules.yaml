@@ -1,3 +1,6 @@
+# for autocompletion in VS Code
+# yaml-language-server: $schema=../configSchema.json
+
 apiVersion: v1
 aliases:
   - properties:
@@ -28,13 +31,13 @@ rules:
             enum:
               - Namespace
       then:
-        required: metadata
+        required: [metadata]
         properties:
           metadata:
-            required: labels
+            required: [labels]
             properties:
               labels:
-                required: pod-security.kubernetes.io/enforce
+                required: [pod-security.kubernetes.io/enforce]
                 properties:
                   pod-security.kubernetes.io/enforce:
                     enum:
